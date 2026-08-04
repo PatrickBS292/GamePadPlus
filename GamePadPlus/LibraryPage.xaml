@@ -29,7 +29,7 @@
                 VerticalAlignment="Center"
                 Foreground="Black"/>
 
-            <Button
+            <Button 
                 Grid.Column="1"
                 FontSize="40"
                 FontWeight="Bold"
