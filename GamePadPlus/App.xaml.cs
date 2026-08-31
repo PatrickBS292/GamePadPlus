@@ -28,9 +28,6 @@ namespace GamePadPlus
                     Shutdown();
                     return;
                 }
-                MessageBox.Show(
-    $"GamePad+ received this folder:\n\n{selectedLocation}",
-    "Debug - Selected Location");
                 settingsService.SaveLibraryLocation(selectedLocation);
             }
         }
