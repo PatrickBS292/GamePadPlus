@@ -1,13 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GamePadPlus.Models
 {
-    public class Game {
-        public string Name { get; set; }
-        public string ImagePath { get; set; }
+    public class Game
+    {
+        public Guid Id { get; set; } = Guid.NewGuid();
 
-        public string Notes { get; set; }
+        public string Name { get; set; } = string.Empty;
+
+        public string Notes { get; set; } = string.Empty;
+
+        public string? ImageFileName { get; set; }
+
+        public Game()
+        {
+        }
+
+        public Game(string name)
+        {
+            Name = name;
+        }
     }
 }

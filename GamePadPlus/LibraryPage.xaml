@@ -60,50 +60,76 @@
 
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button
-                                Click="GameCard_Click"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                Padding="0">
 
-                            <Border
-                                    Width="220"
-                                    Height="280"
-                                    Margin="15"
-                                    CornerRadius="12"
-                                    BorderBrush="#3A3A3A"
-                                    BorderThickness="1"
-                                    Background="#2D2D30">
+                        <Grid
+            Width="220"
+            Height="280"
+            Margin="15">
 
-                                <StackPanel>
-                                    <Border
-                                            Width="200"
-                                            Height="180"
-                                            Margin="10"
-                                            Background="#404040"
-                                            CornerRadius="8">
+                           
+                            <Button
+                Click="GameCard_Click"
+                Background="Transparent"
+                BorderThickness="0"
+                Padding="0">
+
+                                <Border
+                    CornerRadius="12"
+                    BorderBrush="#3A3A3A"
+                    BorderThickness="1"
+                    Background="#2D2D30">
+
+                                    <StackPanel>
+
+                                        <Border
+                            Width="200"
+                            Height="180"
+                            Margin="10"
+                            Background="#404040"
+                            CornerRadius="8">
+
+                                            <TextBlock
+                                Text="No Cover"
+                                Foreground="LightGray"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
+                                        </Border>
 
                                         <TextBlock
-                                                Text="No Cover"
-                                                Foreground="LightGray"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"/>
-                                    </Border>
+                            Text="{Binding Name}"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            HorizontalAlignment="Center"
+                            TextAlignment="Center"
+                            TextWrapping="Wrap"
+                            MaxHeight="50"
+                            Margin="10,5"/>
 
-                                    <TextBlock
-                                            Text="{Binding Name}"
-                                            FontSize="16"
-                                            FontWeight="Bold"
-                                            Foreground="White"
-                                            HorizontalAlignment="Center"
-                                            TextAlignment="Center"
-                                            TextWrapping="Wrap"
-                                            MaxHeight="50"
-                                            Margin="10,5"/>
-                                </StackPanel>
-                            </Border>
+                                    </StackPanel>
 
-                        </Button>
+                                </Border>
+
+                            </Button>
+
+                            
+                            <Button
+                Content="×"
+                Width="30"
+                Height="30"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="0,5,5,0"
+                Click="DeleteGame_Click"
+                Background="#3A3A3A"
+                Foreground="White"
+                BorderThickness="0"
+                FontSize="18"
+                FontWeight="Bold"
+                Panel.ZIndex="1"/>
+
+                        </Grid>
+
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

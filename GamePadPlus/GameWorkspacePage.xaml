@@ -1,4 +1,5 @@
 ﻿<Page x:Class="GamePadPlus.GameWorkspacePage"
+      Loaded="Page_Loaded"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,6 +12,7 @@
     <Grid Margin="20">
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -47,15 +49,76 @@
             Foreground="LightGray"/>
         </Border>
 
-        <TextBox
-        x:Name="NotesBox"
-        Grid.Row="2"
-        Margin="0,20,0,0"
-        AcceptsReturn="True"
-        VerticalScrollBarVisibility="Auto"
-        TextWrapping="Wrap"
-        FontSize="16"
-        TextChanged="NotesBox_TextChanged"/>
+        <StackPanel
+    Grid.Row="2"
+    Orientation="Horizontal"
+    Margin="0,20,0,0">
+
+            <ToggleButton
+    x:Name="BoldButton"
+    Content="B"
+    Width="35"
+    Height="30"
+    FontWeight="Bold"
+    Focusable="False"
+    Click="Bold_Click"/>
+
+            <ToggleButton
+    x:Name="ItalicButton"
+    Content="I"
+    Width="35"
+    Height="30"
+    FontStyle="Italic"
+    Margin="5,0,0,0"
+    Focusable="False"
+    Click="Italic_Click"/>
+
+            <ToggleButton
+    x:Name="UnderlineButton"
+    Content="U"
+    Width="35"
+    Height="30"
+    Margin="5,0,0,0"
+    Focusable="False"
+    Click="Underline_Click"/>
+
+            <ComboBox
+        x:Name="FontSizeBox"
+        Width="70"
+        Height="30"
+        Margin="15,0,0,0"
+        SelectionChanged="FontSizeBox_SelectionChanged">
+
+                <ComboBoxItem Content="12"/>
+                <ComboBoxItem Content="14"/>
+                <ComboBoxItem Content="16"/>
+                <ComboBoxItem Content="18"/>
+                <ComboBoxItem Content="20"/>
+                <ComboBoxItem Content="24"/>
+                <ComboBoxItem Content="28"/>
+                <ComboBoxItem Content="32"/>
+
+            </ComboBox>
+
+            <Button
+    x:Name="BulletButton"
+    Content="•"
+    Width="35"
+    Height="30"
+    Margin="15,0,0,0"
+    FontSize="18"
+    Click="Bullet_Click"/>
+            
+        </StackPanel>
+
+        <RichTextBox
+    x:Name="NotesBox"
+    Grid.Row="3"
+    Margin="0,20,0,0"
+    VerticalScrollBarVisibility="Auto"
+    FontSize="16"
+    TextChanged="NotesBox_TextChanged"
+    SelectionChanged="NotesBox_SelectionChanged"/>
 
     </Grid>
 </Page>

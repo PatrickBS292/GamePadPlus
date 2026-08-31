@@ -11,12 +11,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GamePadPlus.Models;
 using System.Collections.ObjectModel;
+using GamePadPlus.Services;
 
 namespace GamePadPlus
 {
     public partial class CreateGameWindow : Window
     {
-        
+        private readonly LibraryStorageService storageService = new LibraryStorageService();
+
         public ObservableCollection<Game> Games { get; set; }
 
         public CreateGameWindow(ObservableCollection<Game> games)
@@ -44,6 +46,7 @@ namespace GamePadPlus
             Game newGame = new Game();
             newGame.Name = GameName;
             Games.Add(newGame);
+            storageService.SaveLibrary(Games);
             Close();
         }
 
