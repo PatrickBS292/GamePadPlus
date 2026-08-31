@@ -18,17 +18,6 @@ namespace GamePadPlus
         {
             InitializeComponent();
 
-            LibraryLocationService locationService = new LibraryLocationService();
-
-            string? selectedFolder = locationService.ChooseLibraryLocation();
-
-            if (selectedFolder != null)
-            {
-                MessageBox.Show(
-                    $"You selected:\n\n{selectedFolder}",
-                    "GamePad+");
-            }
-
             List<Game> savedGames = storageService.LoadLibrary();
 
             foreach (Game game in savedGames)
