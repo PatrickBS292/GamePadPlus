@@ -11,6 +11,25 @@ namespace GamePadPlus
     {
         private readonly LibraryStorageService storageService = new LibraryStorageService();
 
+        private string GetCoverPath(Game game)
+        {
+            if (string.IsNullOrWhiteSpace(game.ImageFileName))
+            {
+                return string.Empty;
+            }
+
+            return System.IO.Path.Combine(
+                storageService.GetCoversFolder(),
+                game.ImageFileName
+            );
+        }
+
+        public void RefreshGames()
+        {
+            GameList.ItemsSource = null;
+            GameList.ItemsSource = Games;
+        }
+
         public ObservableCollection<Game> Games { get; set; }
             = new ObservableCollection<Game>();
 
@@ -40,7 +59,8 @@ namespace GamePadPlus
 
             Game selectedGame = (Game)clickedButton.DataContext;
 
-            NavigationService?.Navigate(new GameWorkspacePage(selectedGame, Games));
+            NavigationService?.Navigate(
+            new GameWorkspacePage(selectedGame, Games, this));
         }
 
         private void DeleteGame_Click(object sender, RoutedEventArgs e)
@@ -62,5 +82,6 @@ namespace GamePadPlus
                 storageService.SaveLibrary(Games);
             }
         }
+
     }
 }

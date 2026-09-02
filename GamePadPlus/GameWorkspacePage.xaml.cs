@@ -6,7 +6,6 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Markup;
 using System.Windows.Media.Imaging;
 using System;
 
@@ -14,29 +13,34 @@ namespace GamePadPlus
 {
     public partial class GameWorkspacePage : Page
     {
-        private readonly LibraryStorageService storageService = new LibraryStorageService();
-
+        private readonly LibraryStorageService storageService =
+            new LibraryStorageService();
 
         private Game CurrentGame;
 
         private ObservableCollection<Game> Games;
 
+        private LibraryPage LibraryPage;
+
         private bool isLoadingNotes;
 
         private bool isResettingFormatting;
 
-        public GameWorkspacePage(Game game, ObservableCollection<Game> games)
+        public GameWorkspacePage(
+            Game game,
+            ObservableCollection<Game> games,
+            LibraryPage libraryPage)
         {
             InitializeComponent();
 
             CurrentGame = game;
             Games = games;
+            LibraryPage = libraryPage;
 
             GameTitle.Text = CurrentGame.Name;
 
             LoadNotes();
             LoadCoverImage();
-
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -44,7 +48,9 @@ namespace GamePadPlus
             ResetFormattingButtons();
         }
 
-        private void NotesBox_SelectionChanged(object sender, RoutedEventArgs e)
+        private void NotesBox_SelectionChanged(
+            object sender,
+            RoutedEventArgs e)
         {
             if (isLoadingNotes)
             {
@@ -74,9 +80,9 @@ namespace GamePadPlus
                 italicValue.Equals(FontStyles.Italic);
 
             UnderlineButton.IsChecked =
-            underlineValue != null &&
-            underlineValue != DependencyProperty.UnsetValue &&
-            underlineValue.Equals(TextDecorations.Underline);
+                underlineValue != null &&
+                underlineValue != DependencyProperty.UnsetValue &&
+                underlineValue.Equals(TextDecorations.Underline);
         }
 
         private void ResetFormattingButtons()
@@ -145,7 +151,9 @@ namespace GamePadPlus
             {
                 using (MemoryStream stream = new MemoryStream())
                 {
-                    byte[] bytes = System.Text.Encoding.UTF8.GetBytes(CurrentGame.Notes);
+                    byte[] bytes =
+                        System.Text.Encoding.UTF8.GetBytes(
+                            CurrentGame.Notes);
 
                     stream.Write(bytes, 0, bytes.Length);
                     stream.Position = 0;
@@ -161,9 +169,8 @@ namespace GamePadPlus
             isLoadingNotes = false;
         }
 
-        
-            private void LoadCoverImage()
-            {
+        private void LoadCoverImage()
+        {
             if (string.IsNullOrWhiteSpace(CurrentGame.ImageFileName))
             {
                 return;
@@ -184,12 +191,12 @@ namespace GamePadPlus
             coverImage.BeginInit();
             coverImage.UriSource = new Uri(coverPath);
             coverImage.CacheOption = BitmapCacheOption.OnLoad;
+            coverImage.CreateOptions =
+                BitmapCreateOptions.IgnoreImageCache;
             coverImage.EndInit();
 
             CoverImage.Source = coverImage;
         }
-
-
 
         private void SaveNotes()
         {
@@ -204,7 +211,8 @@ namespace GamePadPlus
 
                 stream.Position = 0;
 
-                using (StreamReader reader = new StreamReader(stream))
+                using (StreamReader reader =
+                    new StreamReader(stream))
                 {
                     CurrentGame.Notes = reader.ReadToEnd();
                 }
@@ -239,15 +247,15 @@ namespace GamePadPlus
             EditingCommands.ToggleBullets.Execute(null, NotesBox);
         }
 
-        
-
-
-
-        private void FontSizeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void FontSizeBox_SelectionChanged(
+            object sender,
+            SelectionChangedEventArgs e)
         {
             if (FontSizeBox.SelectedItem is ComboBoxItem selectedItem)
             {
-                if (double.TryParse(selectedItem.Content.ToString(), out double fontSize))
+                if (double.TryParse(
+                    selectedItem.Content.ToString(),
+                    out double fontSize))
                 {
                     TextSelection selection = NotesBox.Selection;
 
@@ -261,9 +269,13 @@ namespace GamePadPlus
             }
         }
 
-        private void NotesBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void NotesBox_TextChanged(
+            object sender,
+            TextChangedEventArgs e)
         {
-            if (CurrentGame == null || isLoadingNotes || isResettingFormatting)
+            if (CurrentGame == null ||
+                isLoadingNotes ||
+                isResettingFormatting)
             {
                 return;
             }
@@ -281,12 +293,15 @@ namespace GamePadPlus
             storageService.SaveLibrary(Games);
         }
 
-        private void ChooseCover_Click(object sender, RoutedEventArgs e)
+        private void ChooseCover_Click(
+            object sender,
+            RoutedEventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
 
             dialog.Title = "Choose a cover image";
-            dialog.Filter = "Image files|*.png;*.jpg;*.jpeg;*.webp";
+            dialog.Filter =
+                "Image files|*.png;*.jpg;*.jpeg;*.webp";
 
             bool? result = dialog.ShowDialog();
 
@@ -299,16 +314,16 @@ namespace GamePadPlus
 
             string extension = Path.GetExtension(selectedFile);
 
-            string fileName = CurrentGame.Id + extension;
+            string fileName =
+                CurrentGame.Id + extension;
 
-            string coversFolder = storageService.GetCoversFolder();
+            string coversFolder =
+                storageService.GetCoversFolder();
 
             Directory.CreateDirectory(coversFolder);
 
-            string destinationFile = Path.Combine(
-                coversFolder,
-                fileName
-            );
+            string destinationFile =
+                Path.Combine(coversFolder, fileName);
 
             File.Copy(
                 selectedFile,
@@ -320,12 +335,19 @@ namespace GamePadPlus
 
             CoverImage.Source = null;
 
-            BitmapImage coverImage = new BitmapImage();
+            BitmapImage coverImage =
+                new BitmapImage();
 
             coverImage.BeginInit();
-            coverImage.UriSource = new Uri(destinationFile);
-            coverImage.CacheOption = BitmapCacheOption.OnLoad;
-            coverImage.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+            coverImage.UriSource =
+                new Uri(destinationFile);
+
+            coverImage.CacheOption =
+                BitmapCacheOption.OnLoad;
+
+            coverImage.CreateOptions =
+                BitmapCreateOptions.IgnoreImageCache;
+
             coverImage.EndInit();
 
             CoverImage.Source = coverImage;
@@ -335,11 +357,15 @@ namespace GamePadPlus
             MessageBox.Show("Cover image saved!");
         }
 
-        private void Back_Click(object sender, RoutedEventArgs e)
+        private void Back_Click(
+            object sender,
+            RoutedEventArgs e)
         {
             SaveNotes();
 
             storageService.SaveLibrary(Games);
+
+            LibraryPage.RefreshGames();
 
             NavigationService?.GoBack();
         }

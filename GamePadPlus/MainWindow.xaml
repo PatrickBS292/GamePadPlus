@@ -1,32 +1,122 @@
-﻿ <Window x:Class="GamePadPlus.MainWindow"
+﻿<Window x:Class="GamePadPlus.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="GamePad+"
         Height="720"
-        Width="1200">
+        Width="1200"
+        Background="#1E2329">
+
+    <Window.Resources>
+
+        <Style x:Key="SidebarButton" TargetType="Button">
+
+            <Setter Property="Height" Value="45"/>
+            <Setter Property="Margin" Value="15,0,15,10"/>
+            <Setter Property="Background" Value="#303740"/>
+            <Setter Property="Foreground" Value="#FF8A3D"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Cursor" Value="Hand"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="Button">
+
+                        <Border
+                            x:Name="ButtonBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="Transparent"
+                            BorderThickness="1"
+                            CornerRadius="8">
+
+                            <ContentPresenter
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="Center"
+                                Margin="{TemplateBinding Padding}"/>
+
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+
+                            <!-- Hover -->
+                            <Trigger Property="IsMouseOver" Value="True">
+
+                                <Setter
+                                    TargetName="ButtonBorder"
+                                    Property="BorderBrush"
+                                    Value="#FF8A3D"/>
+
+                            </Trigger>
+
+                            <!-- Pressed -->
+                            <Trigger Property="IsPressed" Value="True">
+
+                                <Setter
+                                    TargetName="ButtonBorder"
+                                    Property="BorderBrush"
+                                    Value="#FF8A3D"/>
+
+                                <Setter
+                                    TargetName="ButtonBorder"
+                                    Property="BorderThickness"
+                                    Value="2"/>
+
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+
+    </Window.Resources>
+
 
     <Grid>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="180"/>
+            <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        
-        <StackPanel
-            Grid.Column="0">
 
-            <Button
-                Content="Home"
-                Click="Home_Click"/>
+        <!-- Sidebar -->
 
-            <Button
-                Content="Info"
-                Click="Info_Click"/>
+        <Border
+            Grid.Column="0"
+            Background="#252B32">
 
-        </StackPanel>
+            <StackPanel>
 
-        
+                <TextBlock
+                    Text="GamePad+"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Foreground="#FF8A3D"
+                    Margin="25,30,20,40"/>
+
+                <Button
+                    Content="Home"
+                    Click="Home_Click"
+                    Style="{StaticResource SidebarButton}"/>
+
+                <Button
+                    Content="Info"
+                    Click="Info_Click"
+                    Style="{StaticResource SidebarButton}"/>
+
+            </StackPanel>
+
+        </Border>
+
+
+        <!-- Main content -->
+
         <Frame
             x:Name="MainFrame"
             Grid.Column="1"
@@ -35,4 +125,3 @@
     </Grid>
 
 </Window>
-
