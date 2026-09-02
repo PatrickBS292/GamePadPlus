@@ -1,12 +1,38 @@
-﻿<Window x:Class="GamePadPlus.MainWindow"
+﻿ <Window x:Class="GamePadPlus.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="GamePad+"
         Height="720"
         Width="1200">
 
-    <Frame
-        x:Name="MainFrame"
-        NavigationUIVisibility="Hidden"/>
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        
+        <StackPanel
+            Grid.Column="0">
+
+            <Button
+                Content="Home"
+                Click="Home_Click"/>
+
+            <Button
+                Content="Info"
+                Click="Info_Click"/>
+
+        </StackPanel>
+
+        
+        <Frame
+            x:Name="MainFrame"
+            Grid.Column="1"
+            NavigationUIVisibility="Hidden"/>
+
+    </Grid>
 
 </Window>
+
