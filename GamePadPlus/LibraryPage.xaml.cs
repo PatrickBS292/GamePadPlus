@@ -11,19 +11,6 @@ namespace GamePadPlus
     {
         private readonly LibraryStorageService storageService = new LibraryStorageService();
 
-        private string GetCoverPath(Game game)
-        {
-            if (string.IsNullOrWhiteSpace(game.ImageFileName))
-            {
-                return string.Empty;
-            }
-
-            return System.IO.Path.Combine(
-                storageService.GetCoversFolder(),
-                game.ImageFileName
-            );
-        }
-
         public void RefreshGames()
         {
             GameList.ItemsSource = null;
