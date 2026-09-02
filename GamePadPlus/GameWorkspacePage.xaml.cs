@@ -1,7 +1,6 @@
 ﻿using GamePadPlus.Models;
 using GamePadPlus.Services;
 using Microsoft.Win32;
-using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
