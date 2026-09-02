@@ -605,7 +605,7 @@
                 FontSize="16"
                 TextChanged="NotesBox_TextChanged"
                 SelectionChanged="NotesBox_SelectionChanged"
-                GotKeyboardFocus="NotesBox_GotKeyboardFocus"/>
+                MouseLeftButtonUp="NotesBox_MouseLeftButtonUp"/>
 
         </Border>
 

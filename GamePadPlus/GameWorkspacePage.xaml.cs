@@ -1,13 +1,14 @@
 ﻿using GamePadPlus.Models;
 using GamePadPlus.Services;
 using Microsoft.Win32;
+using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using System;
 
 namespace GamePadPlus
 {
@@ -25,6 +26,8 @@ namespace GamePadPlus
         private bool isLoadingNotes;
 
         private bool isResettingFormatting;
+
+        private double selectedFontSize = 16.0;
 
         public GameWorkspacePage(
             Game game,
@@ -368,6 +371,19 @@ namespace GamePadPlus
             LibraryPage.RefreshGames();
 
             NavigationService?.GoBack();
+        }
+
+        private void NotesBox_MouseLeftButtonUp(
+    object sender,
+    MouseButtonEventArgs e)
+        {
+            NotesBox.Focus();
+
+            NotesBox.Selection.ApplyPropertyValue(
+                TextElement.FontSizeProperty,
+                selectedFontSize);
+
+            UpdateFormattingButtons();
         }
     }
 }
