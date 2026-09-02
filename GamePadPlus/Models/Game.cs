@@ -14,6 +14,7 @@ namespace GamePadPlus.Models
 
         public Game()
         {
+
         }
 
         public Game(string name)

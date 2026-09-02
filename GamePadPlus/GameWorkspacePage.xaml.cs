@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Markup;
+using Microsoft.Win32;
 
 namespace GamePadPlus
 {
@@ -205,6 +206,8 @@ namespace GamePadPlus
             EditingCommands.ToggleBullets.Execute(null, NotesBox);
         }
 
+        
+
 
 
         private void FontSizeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -243,6 +246,21 @@ namespace GamePadPlus
 
             SaveNotes();
             storageService.SaveLibrary(Games);
+        }
+
+        private void ChooseCover_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+
+            dialog.Title = "Choose a cover image";
+            dialog.Filter = "Image files|*.png;*.jpg;*.jpeg;*.webp";
+
+            bool? result = dialog.ShowDialog();
+
+            if (result == true)
+            {
+                MessageBox.Show(dialog.FileName);
+            }
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)

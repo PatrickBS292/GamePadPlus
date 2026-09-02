@@ -33,21 +33,33 @@
             VerticalAlignment="Center"/>
         </StackPanel>
 
-        <Border
-        Grid.Row="1"
+        <StackPanel
+    Grid.Row="1"
+    Orientation="Horizontal"
+    Margin="0,20,0,0">
+
+            <Border
         Width="250"
         Height="140"
-        Margin="0,20,0,0"
-        HorizontalAlignment="Left"
         Background="#404040"
         CornerRadius="10">
 
-            <TextBlock
+                <TextBlock
             Text="Cover Image"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Foreground="LightGray"/>
-        </Border>
+            </Border>
+
+            <Button
+        Content="Choose Cover"
+        Width="120"
+        Height="35"
+        Margin="15,0,0,0"
+        VerticalAlignment="Bottom"
+        Click="ChooseCover_Click"/>
+
+        </StackPanel>
 
         <StackPanel
     Grid.Row="2"
