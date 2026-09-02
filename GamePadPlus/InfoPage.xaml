@@ -9,12 +9,15 @@
             Text="About GamePad+"
             FontSize="28"
             FontWeight="Bold"
-            Margin="0,0,0,20"/>
+            Margin="0,0,0,20"
+            Foreground="#FF8A3D"/>
+            
 
         <TextBlock
             Text="GamePad+ is a personal game library where you can keep track of your games and write notes about them."
             FontSize="16"
-            TextWrapping="Wrap"/>
+            TextWrapping="Wrap"
+            Foreground="#FF8A3D"/>
 
     </StackPanel>
 

@@ -154,7 +154,7 @@
 
                                             <StackPanel>
 
-                                                <!-- Cover -->
+                                              
 
                                                 <Border
     Width="200"
@@ -170,13 +170,13 @@
                                                 </Border>
 
 
-                                                <!-- Game name -->
+                                                
 
                                                 <TextBlock
                         Text="{Binding Name}"
                         FontSize="16"
                         FontWeight="Bold"
-                        Foreground="#E8E8E8"
+                        Foreground="#FF8A3D"
                         HorizontalAlignment="Center"
                         TextAlignment="Center"
                         TextWrapping="Wrap"
@@ -190,7 +190,7 @@
 
                                         <ControlTemplate.Triggers>
 
-                                            <!-- Hover -->
+                                           
 
                                             <Trigger Property="IsMouseOver" Value="True">
 
@@ -202,7 +202,7 @@
                                             </Trigger>
 
 
-                                            <!-- Pressed -->
+                                            
 
                                             <Trigger Property="IsPressed" Value="True">
 
