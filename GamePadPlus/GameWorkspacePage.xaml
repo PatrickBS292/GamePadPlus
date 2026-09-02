@@ -470,7 +470,8 @@
                 Content="← Back"
                 Width="95"
                 Style="{StaticResource WorkspaceButtonStyle}"
-                Click="Back_Click"/>
+                Click="Back_Click"
+                Foreground="#FF8A3D"/>
 
 
             <TextBlock
@@ -519,7 +520,8 @@
                 Margin="15,0,0,0"
                 VerticalAlignment="Bottom"
                 Style="{StaticResource WorkspaceButtonStyle}"
-                Click="ChooseCover_Click"/>
+                Click="ChooseCover_Click"
+                Foreground="#FF8A3D"/>
 
         </Grid>
 
@@ -536,7 +538,8 @@
                 FontWeight="Bold"
                 Style="{StaticResource FormattingToggleStyle}"
                 Focusable="False"
-                Click="Bold_Click"/>
+                Click="Bold_Click"
+                Foreground="#FF8A3D"/>
 
 
             <ToggleButton
@@ -546,7 +549,8 @@
                 Margin="6,0,0,0"
                 Style="{StaticResource FormattingToggleStyle}"
                 Focusable="False"
-                Click="Italic_Click"/>
+                Click="Italic_Click"
+                Foreground="#FF8A3D"/>
 
 
             <ToggleButton
@@ -555,7 +559,8 @@
                 Margin="6,0,0,0"
                 Style="{StaticResource FormattingToggleStyle}"
                 Focusable="False"
-                Click="Underline_Click"/>
+                Click="Underline_Click"
+                Foreground="#FF8A3D"/>
 
 
             <ComboBox
@@ -582,7 +587,8 @@
                 FontSize="18"
                 Margin="15,0,0,0"
                 Style="{StaticResource FormattingButtonStyle}"
-                Click="Bullet_Click"/>
+                Click="Bullet_Click"
+                Foreground="#FF8A3D"/>
 
         </StackPanel>
 
