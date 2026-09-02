@@ -40,7 +40,7 @@
 
                         <ControlTemplate.Triggers>
 
-                            <!-- Hover -->
+
                             <Trigger Property="IsMouseOver" Value="True">
 
                                 <Setter
@@ -50,7 +50,7 @@
 
                             </Trigger>
 
-                            <!-- Pressed -->
+
                             <Trigger Property="IsPressed" Value="True">
 
                                 <Setter
@@ -85,7 +85,7 @@
         </Grid.ColumnDefinitions>
 
 
-        <!-- Sidebar -->
+
 
         <Border
             Grid.Column="0"
@@ -115,7 +115,7 @@
         </Border>
 
 
-        <!-- Main content -->
+
 
         <Frame
             x:Name="MainFrame"

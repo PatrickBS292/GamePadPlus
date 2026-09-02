@@ -19,28 +19,27 @@
     </Page.Resources>
 
     <Grid>
-
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
+        
         <Grid
             Grid.Row="0"
             Margin="30,25,30,15">
-
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-
+            
             <TextBlock
                 Text="Game Library"
                 FontSize="32"
                 FontWeight="Bold"
                 VerticalAlignment="Center"
                 Foreground="#FF8A3D"/>
-
+            
             <Button
                 Grid.Column="1"
                 Content="+ Add Game"
@@ -68,44 +67,32 @@
                             <ContentPresenter
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"/>
-
                         </Border>
 
 
                         <ControlTemplate.Triggers>
-
                             <Trigger Property="IsMouseOver" Value="True">
-
                                 <Setter
                                     TargetName="ButtonBorder"
                                     Property="BorderBrush"
                                     Value="#FF8A3D"/>
-
                             </Trigger>
 
 
                             <Trigger Property="IsPressed" Value="True">
-
                                 <Setter
                                     TargetName="ButtonBorder"
                                     Property="BorderBrush"
                                     Value="#FF8A3D"/>
-
                                 <Setter
                                     TargetName="ButtonBorder"
                                     Property="BorderThickness"
                                     Value="2"/>
-
                             </Trigger>
-
                         </ControlTemplate.Triggers>
-
                     </ControlTemplate>
-
                 </Button.Template>
-
             </Button>
-
         </Grid>
 
         <ScrollViewer
@@ -117,16 +104,13 @@
             <ItemsControl x:Name="GameList">
 
                 <ItemsControl.ItemsPanel>
-
                     <ItemsPanelTemplate>
                         <WrapPanel/>
                     </ItemsPanelTemplate>
-
                 </ItemsControl.ItemsPanel>
 
 
                 <ItemsControl.ItemTemplate>
-
                     <DataTemplate>
 
                         <Grid
@@ -135,53 +119,53 @@
                             Margin="15">
 
                             <Button
-    Click="GameCard_Click"
-    Background="Transparent"
-    BorderThickness="0"
-    Padding="0"
-    Cursor="Hand">
+                                Click="GameCard_Click"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Padding="0"
+                                Cursor="Hand">
 
                                 <Button.Template>
 
                                     <ControlTemplate TargetType="Button">
 
                                         <Border
-                x:Name="CardBorder"
-                CornerRadius="12"
-                BorderBrush="#3A414A"
-                BorderThickness="1"
-                Background="#252B32">
+                                            x:Name="CardBorder"
+                                            CornerRadius="12"
+                                            BorderBrush="#3A414A"
+                                            BorderThickness="1"
+                                            Background="#252B32">
 
                                             <StackPanel>
 
-                                              
+
 
                                                 <Border
-    Width="200"
-    Height="180"
-    Margin="10"
-    Background="#303740"
-    CornerRadius="8">
+                                                    Width="200"
+                                                    Height="180"
+                                                    Margin="10"
+                                                    Background="#303740"
+                                                    CornerRadius="8">
 
                                                     <Image
-        Source="{Binding ImageFileName, Converter={StaticResource CoverImageConverter}}"
-        Stretch="UniformToFill"/>
+                                                        Source="{Binding ImageFileName, Converter={StaticResource CoverImageConverter}}"
+                                                        Stretch="UniformToFill"/>
 
                                                 </Border>
 
 
-                                                
+
 
                                                 <TextBlock
-                        Text="{Binding Name}"
-                        FontSize="16"
-                        FontWeight="Bold"
-                        Foreground="#FF8A3D"
-                        HorizontalAlignment="Center"
-                        TextAlignment="Center"
-                        TextWrapping="Wrap"
-                        MaxHeight="50"
-                        Margin="10,5"/>
+                                                    Text="{Binding Name}"
+                                                    FontSize="16"
+                                                    FontWeight="Bold"
+                                                    Foreground="#FF8A3D"
+                                                    HorizontalAlignment="Center"
+                                                    TextAlignment="Center"
+                                                    TextWrapping="Wrap"
+                                                    MaxHeight="50"
+                                                    Margin="10,5"/>
 
                                             </StackPanel>
 
@@ -190,31 +174,31 @@
 
                                         <ControlTemplate.Triggers>
 
-                                           
+
 
                                             <Trigger Property="IsMouseOver" Value="True">
 
                                                 <Setter
-                        TargetName="CardBorder"
-                        Property="BorderBrush"
-                        Value="#FF8A3D"/>
+                                                    TargetName="CardBorder"
+                                                    Property="BorderBrush"
+                                                    Value="#FF8A3D"/>
 
                                             </Trigger>
 
 
-                                            
+
 
                                             <Trigger Property="IsPressed" Value="True">
 
                                                 <Setter
-                        TargetName="CardBorder"
-                        Property="BorderBrush"
-                        Value="#FF8A3D"/>
+                                                    TargetName="CardBorder"
+                                                    Property="BorderBrush"
+                                                    Value="#FF8A3D"/>
 
                                                 <Setter
-                        TargetName="CardBorder"
-                        Property="BorderThickness"
-                        Value="2"/>
+                                                    TargetName="CardBorder"
+                                                    Property="BorderThickness"
+                                                    Value="2"/>
 
                                             </Trigger>
 
@@ -227,35 +211,35 @@
                             </Button>
 
                             <Button
-    Content="×"
-    Width="28"
-    Height="28"
-    HorizontalAlignment="Right"
-    VerticalAlignment="Bottom"
-    Margin="0,0,8,8"
-    Click="DeleteGame_Click"
-    Background="#303740"
-    Foreground="#E8E8E8"
-    BorderBrush="#FF8A3D"
-    BorderThickness="1"
-    FontSize="17"
-    FontWeight="Bold"
-    Panel.ZIndex="1"
-    Cursor="Hand">
+                                Content="×"
+                                Width="28"
+                                Height="28"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
+                                Margin="0,0,8,8"
+                                Click="DeleteGame_Click"
+                                Background="#303740"
+                                Foreground="#E8E8E8"
+                                BorderBrush="#FF8A3D"
+                                BorderThickness="1"
+                                FontSize="17"
+                                FontWeight="Bold"
+                                Panel.ZIndex="1"
+                                Cursor="Hand">  
 
                                 <Button.Template>
 
                                     <ControlTemplate TargetType="Button">
 
                                         <Border
-                Background="{TemplateBinding Background}"
-                BorderBrush="{TemplateBinding BorderBrush}"
-                BorderThickness="{TemplateBinding BorderThickness}"
-                CornerRadius="7">
+                                            Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            CornerRadius="7">
 
                                             <ContentPresenter
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"/>
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"/>    
 
                                         </Border>
 
