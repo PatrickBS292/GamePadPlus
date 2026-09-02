@@ -44,11 +44,9 @@
         Background="#404040"
         CornerRadius="10">
 
-                <TextBlock
-            Text="Cover Image"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Foreground="LightGray"/>
+                <Image
+    x:Name="CoverImage"
+    Stretch="UniformToFill"/>
             </Border>
 
             <Button

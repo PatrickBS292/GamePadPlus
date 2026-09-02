@@ -1,12 +1,14 @@
 ﻿using GamePadPlus.Models;
 using GamePadPlus.Services;
+using Microsoft.Win32;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Markup;
-using Microsoft.Win32;
+using System.Windows.Media.Imaging;
+using System;
 
 namespace GamePadPlus
 {
@@ -33,6 +35,7 @@ namespace GamePadPlus
             GameTitle.Text = CurrentGame.Name;
 
             LoadNotes();
+            LoadCoverImage();
 
         }
 
@@ -158,6 +161,36 @@ namespace GamePadPlus
             isLoadingNotes = false;
         }
 
+        
+            private void LoadCoverImage()
+            {
+            if (string.IsNullOrWhiteSpace(CurrentGame.ImageFileName))
+            {
+                return;
+            }
+
+            string coverPath = Path.Combine(
+                storageService.GetCoversFolder(),
+                CurrentGame.ImageFileName
+            );
+
+            if (!File.Exists(coverPath))
+            {
+                return;
+            }
+
+            BitmapImage coverImage = new BitmapImage();
+
+            coverImage.BeginInit();
+            coverImage.UriSource = new Uri(coverPath);
+            coverImage.CacheOption = BitmapCacheOption.OnLoad;
+            coverImage.EndInit();
+
+            CoverImage.Source = coverImage;
+        }
+
+
+
         private void SaveNotes()
         {
             TextRange textRange = new TextRange(
@@ -257,10 +290,49 @@ namespace GamePadPlus
 
             bool? result = dialog.ShowDialog();
 
-            if (result == true)
+            if (result != true)
             {
-                MessageBox.Show(dialog.FileName);
+                return;
             }
+
+            string selectedFile = dialog.FileName;
+
+            string extension = Path.GetExtension(selectedFile);
+
+            string fileName = CurrentGame.Id + extension;
+
+            string coversFolder = storageService.GetCoversFolder();
+
+            Directory.CreateDirectory(coversFolder);
+
+            string destinationFile = Path.Combine(
+                coversFolder,
+                fileName
+            );
+
+            File.Copy(
+                selectedFile,
+                destinationFile,
+                true
+            );
+
+            CurrentGame.ImageFileName = fileName;
+
+            CoverImage.Source = null;
+
+            BitmapImage coverImage = new BitmapImage();
+
+            coverImage.BeginInit();
+            coverImage.UriSource = new Uri(destinationFile);
+            coverImage.CacheOption = BitmapCacheOption.OnLoad;
+            coverImage.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+            coverImage.EndInit();
+
+            CoverImage.Source = coverImage;
+
+            storageService.SaveLibrary(Games);
+
+            MessageBox.Show("Cover image saved!");
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
