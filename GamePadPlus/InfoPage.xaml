@@ -14,7 +14,20 @@
             
 
         <TextBlock
-            Text="GamePad+ is a personal game library where you can keep track of your games and write notes about them."
+            Text="GamePad+ er et lille program, som er lavet ud fra mine egne behov for et note system. &#xA;&#xA;
+Dette er et 1.0 release, så det er blot en minimal fungerende version af programmet &#xA;
+så flere funktioner, samt bug fixes vil komme i fremtiden. &#xA;&#xA;
+Til dem som afprøver programmet, samt bruger det yderligere, vil det være værdsat &#xA;
+hvis de notere sig omkring eventuelle bugs, eller ideer til fremtidige funktioner &#xA;
+som kan tilføjes til programmet. &#xA;&#xA;
+Kendte Bugs:  &#xA;
+Der er lige nu en bug, i forhold til at skifte font size inde i note editoren. &#xA;
+Hvis man vælger en font size og trykker med musen inde i editoren, inden man  &#xA;
+skriver noget, så vil font størelsen ikke ændre sig til den valgte.  &#xA;&#xA;
+Planlagte Funktioner: &#xA;
+- Mulighed for at oprette tasks  &#xA;
+- Mulighed for, at indsætte billeder, links, filer mm. &#xA;
+- Bedre cover image support "
             FontSize="16"
             TextWrapping="Wrap"
             Foreground="#FF8A3D"/>
