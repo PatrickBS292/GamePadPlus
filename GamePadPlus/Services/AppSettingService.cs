@@ -6,7 +6,7 @@ namespace GamePadPlus.Services
     public class AppSettingsService
     {
         private const string ApplicationFolderName = "GamePadPlus";
-        private const string SettingsFileName = "settings.json";
+        private const string SettingsFileName = "GamePadsettings.json";
 
         public string GetSettingsFolder()
         {
