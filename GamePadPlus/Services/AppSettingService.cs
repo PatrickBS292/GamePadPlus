@@ -6,13 +6,12 @@ namespace GamePadPlus.Services
     {
         private const string SettingsFileName = "GamePadsettings.json";
 
-        public string GetSettingsFolder()
-        {
-            string localAppDataFolder = Environment.GetFolderPath(
-                Environment.SpecialFolder.LocalApplicationData
+        public string GetSettingsFolder() {
+            string desktopFolder = Environment.GetFolderPath(
+                Environment.SpecialFolder.Desktop
             );
 
-            return Path.Combine(localAppDataFolder, AppPaths.ApplicationFolderName);
+            return Path.Combine(desktopFolder, AppPaths.ApplicationFolderName);
         }
 
         public string GetSettingsFilePath()
