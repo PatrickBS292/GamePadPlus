@@ -1,6 +1,4 @@
-﻿
-
-namespace GamePadPlus.Models
+﻿namespace GamePadPlus.Models
 {
     public class Game
     {
@@ -14,7 +12,6 @@ namespace GamePadPlus.Models
 
         public Game()
         {
-
         }
 
         public Game(string name)

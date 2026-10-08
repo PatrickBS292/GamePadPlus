@@ -1,7 +1,5 @@
 ﻿using System.Globalization;
-using System.IO;
 using System.Windows.Data;
-using System.Windows.Media.Imaging;
 
 namespace GamePadPlus.Services
 {
@@ -10,7 +8,7 @@ namespace GamePadPlus.Services
         private readonly LibraryStorageService storageService =
             new LibraryStorageService();
 
-        public object Convert(
+        public object? Convert(
             object value,
             Type targetType,
             object parameter,
@@ -22,25 +20,9 @@ namespace GamePadPlus.Services
                 return null;
             }
 
-            string filePath = Path.Combine(
-                storageService.GetCoversFolder(),
-                fileName
-            );
+            string filePath = storageService.GetCoverImagePath(fileName);
 
-            if (!File.Exists(filePath))
-            {
-                return null;
-            }
-
-            BitmapImage image = new BitmapImage();
-
-            image.BeginInit();
-            image.UriSource = new Uri(filePath);
-            image.CacheOption = BitmapCacheOption.OnLoad;
-            image.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-            image.EndInit();
-
-            return image;
+            return ImageLoader.LoadFromFile(filePath);
         }
 
         public object ConvertBack(

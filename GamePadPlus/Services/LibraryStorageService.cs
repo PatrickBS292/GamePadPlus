@@ -1,12 +1,10 @@
 ﻿using System.IO;
-using System.Text.Json;
 using GamePadPlus.Models;
 
 namespace GamePadPlus.Services
 {
     public class LibraryStorageService
     {
-        private const string ApplicationFolderName = "GamePadPlus";
         private const string LibraryFileName = "library.json";
         private const string CoversFolderName = "Covers";
 
@@ -25,7 +23,7 @@ namespace GamePadPlus.Services
 
             return Path.Combine(
                 selectedLocation,
-                ApplicationFolderName
+                AppPaths.ApplicationFolderName
             );
         }
 
@@ -45,6 +43,14 @@ namespace GamePadPlus.Services
             );
         }
 
+        public string GetCoverImagePath(string imageFileName)
+        {
+            return Path.Combine(
+                GetCoversFolder(),
+                imageFileName
+            );
+        }
+
         public void EnsureStorageExists()
         {
             Directory.CreateDirectory(GetDataFolder());
@@ -55,17 +61,7 @@ namespace GamePadPlus.Services
         {
             EnsureStorageExists();
 
-            string json = JsonSerializer.Serialize(
-                games,
-                new JsonSerializerOptions
-                {
-                    WriteIndented = true
-                });
-
-            File.WriteAllText(
-                GetLibraryFilePath(),
-                json
-            );
+            JsonFile.Write(GetLibraryFilePath(), games);
         }
 
         public List<Game> LoadLibrary()
@@ -79,19 +75,8 @@ namespace GamePadPlus.Services
 
             EnsureStorageExists();
 
-            string filePath = GetLibraryFilePath();
-
-            if (!File.Exists(filePath))
-            {
-                return new List<Game>();
-            }
-
-            string json = File.ReadAllText(filePath);
-
-            List<Game>? games =
-                JsonSerializer.Deserialize<List<Game>>(json);
-
-            return games ?? new List<Game>();
+            return JsonFile.Read<List<Game>>(GetLibraryFilePath())
+                ?? new List<Game>();
         }
     }
 }

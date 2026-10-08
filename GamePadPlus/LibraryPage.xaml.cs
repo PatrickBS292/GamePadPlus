@@ -10,12 +10,6 @@ namespace GamePadPlus
     {
         private readonly LibraryStorageService storageService = new LibraryStorageService();
 
-        public void RefreshGames()
-        {
-            GameList.ItemsSource = null;
-            GameList.ItemsSource = Games;
-        }
-
         public ObservableCollection<Game> Games { get; set; }
             = new ObservableCollection<Game>();
 
@@ -30,6 +24,12 @@ namespace GamePadPlus
                 Games.Add(game);
             }
 
+            GameList.ItemsSource = Games;
+        }
+
+        public void RefreshGames()
+        {
+            GameList.ItemsSource = null;
             GameList.ItemsSource = Games;
         }
 
@@ -68,6 +68,5 @@ namespace GamePadPlus
                 storageService.SaveLibrary(Games);
             }
         }
-
     }
 }

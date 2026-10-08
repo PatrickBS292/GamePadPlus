@@ -21,9 +21,9 @@ namespace GamePadPlus
 
         private void CreateGame_Click(object sender, RoutedEventArgs e)
         {
-            string GameName = GameNameBox.Text.Trim();
+            string gameName = GameNameBox.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(GameName))
+            if (string.IsNullOrWhiteSpace(gameName))
             {
                 MessageBox.Show(
                     "Please enter a game name",
@@ -34,9 +34,8 @@ namespace GamePadPlus
                 GameNameBox.Focus();
                 return;
             }
-            Game newGame = new Game();
-            newGame.Name = GameName;
-            Games.Add(newGame);
+
+            Games.Add(new Game(gameName));
             storageService.SaveLibrary(Games);
             Close();
         }
@@ -48,6 +47,5 @@ namespace GamePadPlus
                 CreateGame_Click(sender, e);
             }
         }
-
     }
 }

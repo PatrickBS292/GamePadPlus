@@ -7,7 +7,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 
 namespace GamePadPlus
 {
@@ -16,11 +15,11 @@ namespace GamePadPlus
         private readonly LibraryStorageService storageService =
             new LibraryStorageService();
 
-        private Game CurrentGame;
+        private readonly Game CurrentGame;
 
-        private ObservableCollection<Game> Games;
+        private readonly ObservableCollection<Game> Games;
 
-        private LibraryPage LibraryPage;
+        private readonly LibraryPage LibraryPage;
 
         private bool isLoadingNotes;
 
@@ -178,26 +177,10 @@ namespace GamePadPlus
                 return;
             }
 
-            string coverPath = Path.Combine(
-                storageService.GetCoversFolder(),
-                CurrentGame.ImageFileName
-            );
+            string coverPath = storageService.GetCoverImagePath(
+                CurrentGame.ImageFileName);
 
-            if (!File.Exists(coverPath))
-            {
-                return;
-            }
-
-            BitmapImage coverImage = new BitmapImage();
-
-            coverImage.BeginInit();
-            coverImage.UriSource = new Uri(coverPath);
-            coverImage.CacheOption = BitmapCacheOption.OnLoad;
-            coverImage.CreateOptions =
-                BitmapCreateOptions.IgnoreImageCache;
-            coverImage.EndInit();
-
-            CoverImage.Source = coverImage;
+            CoverImage.Source = ImageLoader.LoadFromFile(coverPath);
         }
 
         private void SaveNotes()
@@ -221,32 +204,31 @@ namespace GamePadPlus
             }
         }
 
-        private void Bold_Click(object sender, RoutedEventArgs e)
+        private void ExecuteEditingCommand(RoutedUICommand command)
         {
             NotesBox.Focus();
 
-            EditingCommands.ToggleBold.Execute(null, NotesBox);
+            command.Execute(null, NotesBox);
+        }
+
+        private void Bold_Click(object sender, RoutedEventArgs e)
+        {
+            ExecuteEditingCommand(EditingCommands.ToggleBold);
         }
 
         private void Italic_Click(object sender, RoutedEventArgs e)
         {
-            NotesBox.Focus();
-
-            EditingCommands.ToggleItalic.Execute(null, NotesBox);
+            ExecuteEditingCommand(EditingCommands.ToggleItalic);
         }
 
         private void Underline_Click(object sender, RoutedEventArgs e)
         {
-            NotesBox.Focus();
-
-            EditingCommands.ToggleUnderline.Execute(null, NotesBox);
+            ExecuteEditingCommand(EditingCommands.ToggleUnderline);
         }
 
         private void Bullet_Click(object sender, RoutedEventArgs e)
         {
-            NotesBox.Focus();
-
-            EditingCommands.ToggleBullets.Execute(null, NotesBox);
+            ExecuteEditingCommand(EditingCommands.ToggleBullets);
         }
 
         private void FontSizeBox_SelectionChanged(
@@ -335,24 +317,11 @@ namespace GamePadPlus
 
             CurrentGame.ImageFileName = fileName;
 
+            // Clear the source first: WPF caches images by URI, and the
+            // destination file name doesn't change between covers, so
+            // just re-setting Source wouldn't reliably show the new image.
             CoverImage.Source = null;
-
-            BitmapImage coverImage =
-                new BitmapImage();
-
-            coverImage.BeginInit();
-            coverImage.UriSource =
-                new Uri(destinationFile);
-
-            coverImage.CacheOption =
-                BitmapCacheOption.OnLoad;
-
-            coverImage.CreateOptions =
-                BitmapCreateOptions.IgnoreImageCache;
-
-            coverImage.EndInit();
-
-            CoverImage.Source = coverImage;
+            CoverImage.Source = ImageLoader.LoadFromFile(destinationFile);
 
             storageService.SaveLibrary(Games);
 
@@ -373,8 +342,8 @@ namespace GamePadPlus
         }
 
         private void NotesBox_MouseLeftButtonUp(
-    object sender,
-    MouseButtonEventArgs e)
+            object sender,
+            MouseButtonEventArgs e)
         {
             NotesBox.Focus();
 
